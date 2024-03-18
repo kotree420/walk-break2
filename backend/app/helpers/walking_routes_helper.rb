@@ -1,0 +1,2 @@
+module WalkingRoutesHelper
+end

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= page_title(yield(:title)) %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <link href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet">
+  </head>
+  <body>
+    <%= render "shared/header" %>
+    <div class="container col-xxl-10 px-4 py-3">
+      <%= render "shared/flash" %>
+      <%= breadcrumbs separator: " &rsaquo; " %>
+    </div>
+    <%= yield %>
+    <%= render "shared/footer" %>
+  </body>
+</html>

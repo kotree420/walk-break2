@@ -1,0 +1,8 @@
+<% provide(:title, "検索結果") %>
+<% breadcrumb :profile_search %>
+<div class="container col-xxl-10 px-4 py-3">
+  <div class="py-5">
+    <%= render "shared/search_results", keyword: @keyword, search_results_count: @search_results_count, path: profiles_path, category: "ユーザー" %>
+    <%= render "shared/index_users", users: @users %>
+  </div>
+</div>

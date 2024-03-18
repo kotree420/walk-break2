@@ -1,0 +1,11 @@
+<% flash.each do |key, values| %>
+  <ul class="alert alert-<%= key %> alert-flash">
+    <% if values.instance_of?(Array) %>
+      <% values.each do |value| %>
+      <li><%= value %></li>
+      <% end %>
+    <% else %>
+      <li><%= values %></li>
+    <% end %>
+  </ul>
+<% end %>

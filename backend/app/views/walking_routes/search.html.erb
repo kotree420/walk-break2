@@ -1,0 +1,8 @@
+<% provide(:title, "検索結果") %>
+<% breadcrumb :walking_route_search %>
+<div class="container col-xxl-10 px-4 py-3">
+  <div class="py-5">
+    <%= render "shared/search_results", keyword: @keyword, search_results_count: @search_results_count, path: walking_routes_path, category: "散歩ルート" %>
+    <%= render "shared/index_route", walking_routes: @walking_routes, route_name_category: "created-walking-route-name" %>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<% provide(:title, @walking_route.name) %>
+<% breadcrumb :walking_route_show, @walking_route %>
+<div class="container col-xxl-10 px-4 py-3">
+  <div class="row flex-lg-row align-items-center g-5 py-3">
+    <div class="col-lg-6">
+      <input type="hidden" id="show-encorded-path" name="encorded-path" value=<%= @walking_route.encorded_path %>>
+      <div class="d-flex flex-row justify-content-between align-items-start">
+        <div class="walking-route-profile-link-wrapper mb-1">
+          <%= link_to profile_path(@user), class: "walking-route-profile-link" do %>
+            <div>
+              <%= image_tag @user.profile_image.url, class: 'walking-route-profile-image' %>
+            </div>
+            <div class="walking-route-profile-name">
+              <%= @user.name %>
+            </div>
+          <% end %>
+        </div>
+        <% if @user == current_user %>
+          <div class="dropdown">
+            <a class="btn btn-primary btn--extend dropdown-toggle edit-dropdown-btn" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-regular fa-pen-to-square"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li>
+                <%= link_to "編集", edit_walking_route_path(@walking_route), class: "dropdown-item", data: { turbo: false } %>
+              </li>
+              <li>
+                <%= button_to "削除", walking_route_path(@walking_route), id: "delete-walking-route-btn", class: "dropdown-item", method: :delete, data: { turbo: false }, onclick: "return walking_route_delete_check_form()" %>
+              </li>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+      <div class="mb-4 row created-at">
+        <div id="created-at-value">作成日時 <%= l @walking_route.created_at %></div>
+      </div>
+      <div class="walking-route-name-wrapper row align-items-center mb-1">
+        <div id="show-walking-route-name" class="walking-route-name-style"><%= @walking_route.name %></div>
+        <div class="d-flex flex-row align-items-center">
+          <% if current_user&.bookmarked?(@walking_route.bookmarks, current_user&.id) %>
+            <%= button_to walking_route_bookmarks_path(@walking_route), class: "btn bookmark-btn already-bookmark-btn", method: :delete, data: { turbo: false } do %>
+              <i id="already-bookmarked-icon" class="fa-solid fa-heart"></i>
+            <% end %>
+          <% else %>
+            <%= button_to walking_route_bookmarks_path(@walking_route), class: "btn bookmark-btn not-yet-bookmark-btn", method: :post, data: { turbo: false } do %>
+              <i id="not-yet-bookmarked-icon" class="fa-regular fa-heart"></i>
+            <% end %>
+          <% end %>
+          <span class="bookmark-btn bookmark-count"><%= @bookmarks_count %></span>
+        </div>
+      </div>
+      <div class="mb-4 show-walking-route-comment-area comment-area-style">
+        <p id="show-walking-route-comment"><%= @walking_route.comment %></p>
+      </div>
+      <div class="mb-1 row">
+        <span id="show-start-address-label" class="col-sm-3">出発地</span>
+        <span id="show-start-address" class="col-sm-9"><%= @walking_route.start_address %></span>
+      </div>
+      <div class="mb-3 row">
+        <span id="show-end-address-label" class="col-sm-3">到着地</span>
+        <span id="show-end-address" class="col-sm-9"><%= @walking_route.end_address %></span>
+      </div>
+      <div class="mb-1 row">
+        <span class="show-total-distance-label col-sm-3">距離</span>
+        <span id="show-total-distance" class="col-sm-9"><%= "#{@walking_route.distance.to_s}km" %></span>
+      </div>
+      <div class="mb-3 row">
+        <span class="show-total-duration-label col-sm-3">時間</span>
+        <span id="show-total-duration" class="col-sm-9 total-duration-style"><%= "#{@walking_route.duration.to_s}分" %></span>
+      </div>
+      <div class="row">
+        <span class="show-calorie-consumption-label col-sm-3">消費カロリー</span>
+        <% if user_signed_in? && current_user.body_weight %>
+          <span class="col-sm-9"><%= "#{(Constants::METS * current_user.body_weight * @walking_route.duration.fdiv(60) * Constants::METS_OPTION).round.to_s}kcal" %></span>
+        <% elsif user_signed_in? %>
+          <span class="index-body-weight-unregistered col-sm-9">体重登録が必要</span>
+        <% else %>
+          <span class="index-body-weight-unregistered col-sm-9">ユーザー登録が必要</span>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div id="map" class="mx-auto img-fluid"></div>
+    </div>
+  </div>
+</div>
+<%= render "shared/google_maps_api" %>

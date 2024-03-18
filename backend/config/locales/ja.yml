@@ -1,0 +1,45 @@
+ja:
+  activerecord:
+    attributes:
+      walking_route:
+        name: 散歩ルート名
+        comment: コメント
+        distance: 距離
+        duration: 時間
+        start_address: 出発地
+        end_address: 到着地
+        created_at: 作成日時
+        updated_at: 更新日時
+        encorded_path: 散歩ルートデータ
+    errors:
+      models:
+        walking_route:
+          attributes:
+            name:
+              format: "%{attribute}: %{message}"
+              blank: 未入力
+              too_long: "%{count}文字以内"
+            comment:
+              format: "%{attribute}: %{message}"
+              blank: 未入力
+              too_long: "%{count}文字以内"
+            distance:
+              format: "%{attribute}: %{message}"
+              blank: ルート未出力
+              not_a_number: 数値のみ
+            duration:
+              format: "%{attribute}: %{message}"
+              blank: ルート未出力
+              not_a_number: 数値のみ
+            start_address:
+              format: "%{attribute}: %{message}"
+              blank: 未入力
+            end_address:
+              format: "%{attribute}: %{message}"
+              blank: 未入力
+            encorded_path:
+              format: "%{attribute}: %{message}"
+              blank: ルート未出力
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"

@@ -1,0 +1,57 @@
+<% provide(:title, 'プロフィール編集') %>
+<% breadcrumb :edit_profile, @user %>
+<main>
+  <div class="container col-xxl-10 px-4 py-3">
+    <div class="mx-auto">
+      <%= form_with url: profile_path, method: :patch do |f| %>
+        <div class="row align-items-center g-5 py-3 mb-3">
+          <div class="col-lg-2 edit-profile-image-wrapper">
+            <div class="mb-2">
+              <%= f.label :profile_image do %>
+                <%= image_tag @user.profile_image.url, class: 'profile-image edit-image' %>
+                <%= f.file_field :profile_image, class: "image-uploader", style: "display: none;" %>
+              <% end %>
+            </div>
+            <div>
+              画像を削除する
+              <%= f.check_box :remove_profile_image %>
+            </div>
+          </div>
+          <div class="col-lg-10">
+            <div class="row mb-4">
+              <div class="col-md-3">
+                <%= f.label :name, "ユーザー名", for: "edit-profile-name" %><br>
+                <span>（20文字以内）</span>
+              </div>
+              <div class="col-md-9">
+                <%= f.text_field :name, value: @user.name, id: "edit-profile-name", class: "edit-profile-input", maxlength: "20", required: "true" %>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-md-3">
+                <%= f.label :comment, "自己紹介", for: "edit-profile-comment" %><br>
+                <span>（140文字以内）</span>
+              </div>
+              <div class="col-md-9">
+                <%= f.text_area :comment, value: @user.comment, id: "edit-profile-comment", class: "edit-profile-input edit-profile-textarea", maxlength: "140" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <%= f.label :body_weight, "体重" %>
+                <span>（kg）</span><br>
+                <span>※公開されません</span>
+              </div>
+              <div class="col-md-9">
+                <%= f.number_field :body_weight, value: @user.body_weight, class: "edit-profile-input" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-grid gap-2 col-md-6 mx-auto">
+          <%= f.submit "更新", class: "btn btn-primary btn--extend" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</main>

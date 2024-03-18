@@ -1,0 +1,41 @@
+<% provide(:title, "散歩ルート") %>
+<% breadcrumb :walking_route_index %>
+<div class="container col-xxl-10 px-4 py-3">
+  <div class="py-5">
+    <div class="d-md-flex flex-row align-items-center">
+      <div class="dropdown index-sort-dropdown">
+        <a class="btn btn-primary btn--extend dropdown-toggle sort-dropdown-btn" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa-solid fa-sort"></i>
+          <%= @sort_category %>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <li>
+            <%= link_to '新着順', walking_routes_path, class: "dropdown-item" %>
+          </li>
+          <li>
+            <%= link_to '古い順', walking_routes_path(old: "true"), class: "dropdown-item" %>
+          </li>
+          <li>
+            <%= link_to '人気順', walking_routes_path(popular: "true"), class: "dropdown-item" %>
+          </li>
+          <li>
+            <%= link_to '距離が長い順', walking_routes_path(distance_longest: "true"), class: "dropdown-item" %>
+          </li>
+          <li>
+            <%= link_to '距離が短い順', walking_routes_path(distance_shortest: "true"), class: "dropdown-item" %>
+          </li>
+          <li>
+            <%= link_to '時間が長い順', walking_routes_path(duration_longest: "true"), class: "dropdown-item" %>
+          </li>
+          <li>
+            <%= link_to '時間が短い順', walking_routes_path(duration_shortest: "true"), class: "dropdown-item" %>
+          </li>
+        </ul>
+      </div>
+      <div class="index-search-form-container">
+        <%= render "shared/search_form", path: search_walking_routes_path, placeholder: "住所、地名で探す" %>
+      </div>
+    </div>
+    <%= render "shared/index_route", walking_routes: @walking_routes, route_name_category: "created-walking-route-name" %>
+  </div>
+</div>

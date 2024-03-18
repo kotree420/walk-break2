@@ -1,0 +1,10 @@
+<% provide(:title, "ユーザー") %>
+<% breadcrumb :profile_index %>
+<div class="container col-xxl-10 px-4 py-3">
+  <div class="py-5">
+    <div class="index-search-form-container">
+      <%= render "shared/search_form", path: search_profiles_path, placeholder: "ユーザー名で探す" %>
+    </div>
+    <%= render "shared/index_users", users: @users %>
+  </div>
+</div>

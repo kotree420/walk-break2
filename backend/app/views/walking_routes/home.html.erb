@@ -1,0 +1,34 @@
+<main>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">散歩に行こう</h1>
+        <p class="lead text-muted">
+          何かに息詰まっているなら、散歩に出かけてみましょう。<br>
+          お気に入りの散歩ルートがあれば、是非教えてください。
+        </p>
+        <div class="home-search-form-container mb-3">
+          <%= render "shared/search_form", path: search_walking_routes_path, placeholder: "住所、地名で探す" %>
+        </div>
+        <%= link_to new_walking_route_path, class: "btn btn-secondary my-2 btn--extend home-new-walking-route-btn", data: { turbo: false } do %>
+          <i class="fa-solid fa-pencil"></i>
+          散歩ルートを作成する
+        <% end %>
+      </div>
+    </div>
+  </section>
+  <div class="py-3 bg-light">
+    <h2 class="home-sort-name text-center mb-4">
+      新着散歩ルート一覧
+    </h2>
+    <div class="mb-2">
+      <%= render "shared/index_route", walking_routes: @walking_routes, route_name_category: "created-walking-route-name" %>
+    </div>
+    <div class="text-center">
+      <%= link_to walking_routes_path, class: "btn btn-primary my-2 btn--extend" do %>
+        <i class="fa-solid fa-angle-right"></i>
+        散歩ルートを一覧からもっと探す
+      <% end %>
+    </div>
+  </div>
+</main>

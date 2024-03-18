@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <% users.each do |user| %>
+      <div class="col">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div class="mb-3">
+              <div class="d-flex flex-row justify-content-between align-items-center">
+                <%= link_to profile_path(user), class: "index-profile-link" do %>
+                  <div class="index-profile-wrapper d-flex justify-content-start align-items-center">
+                    <div>
+                      <%= image_tag user.profile_image.url, class: 'index-profile-image' %>
+                    </div>
+                    <h5 class="index-profile-name">
+                      <%= user.name %>
+                    </h5>
+                  </div>
+                <% end %>
+                <% if user == current_user %>
+                  <div class="dropdown">
+                    <a class="btn btn-primary btn--extend dropdown-toggle index-edit-dropdown-btn" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa-regular fa-pen-to-square"></i>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li>
+                        <%= link_to "編集", edit_profile_path(user), class: "dropdown-item" %>
+                      </li>
+                    </ul>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="d-flex flex-row align-items-center">
+              <div class="index-profile-count-wrapper">
+                <div class="index-profile-count-label">ルート作成数</div>
+                <div class="text-center"><%= user.walking_routes.length %></div>
+              </div>
+              <div class="index-profile-count-wrapper">
+                <div class="index-profile-count-label">ブックマーク数</div>
+                <div class="text-center"><%= user.bookmarked_walking_routes.length %></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

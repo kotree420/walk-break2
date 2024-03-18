@@ -1,0 +1,68 @@
+<% provide(:title, @user.name) %>
+<% breadcrumb :profile_show, @user %>
+<main>
+  <div class="container col-xxl-10 px-4 py-3">
+    <div class="mx-auto">
+      <div class="row g-5 py-3 mb-5">
+        <div class="col-lg-2 show-profile-image-wrapper">
+          <%= image_tag @user.profile_image.url, class: 'profile-image' %>
+        </div>
+        <div class="col-lg-10">
+          <div class="show-profile-name-wrapper row">
+            <div class="col-sm-4">
+              <span class="show-profile-name"><%= @user.name %></span>
+            </div>
+            <% if @user == current_user %>
+              <div class="col-sm-8">
+                <% if current_user.body_weight.present? %>
+                  <span class="profile-body-weight body-weight-registered">
+                    体重登録済み
+                    <i class="fa-solid fa-check"></i>
+                  </span>
+                <% else %>
+                  <span class="profile-body-weight body-weight-unregistered">
+                    体重未登録
+                    <i class="fa-solid fa-xmark"></i>
+                  </span>
+                <% end %>
+                <span><%= link_to "プロフィール編集", edit_profile_path, class: "btn btn-primary btn--extend show-edit-profile-btn", data: { turbo: false } %></span>
+                <span><%= link_to "設定", edit_user_registration_path, class: "btn btn-primary btn--extend show-edit-registration-btn" %></span>
+              </div>
+            <% end %>
+          </div>
+          <p class="show-profile-comment"><%= @user.comment %></p>
+          <div class="d-flex flex-row align-items-center">
+            <div class="show-profile-count-wrapper">
+              <div class="show-profile-count-label">ルート作成数</div>
+              <div class="show-profile-route-count text-center"><%= @user.walking_routes.length %></div>
+            </div>
+            <div class="show-profile-count-wrapper">
+              <div class="show-profile-count-label">ブックマーク数</div>
+              <div class="show-profile-bookmark-count text-center"><%= @user.bookmarked_walking_routes.length %></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul class="nav nav-tabs justify-content-center">
+    <li class="nav-item">
+      <a href="#created-routes" class="nav-link active" data-bs-toggle="tab">作成ルート</a>
+    </li>
+    <li class="nav-item">
+      <a href="#bookmarked-routes" class="nav-link" data-bs-toggle="tab">ブックマーク</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div id="created-routes" class="tab-pane active">
+      <div class="album py-5 bg-light">
+        <%= render "shared/index_route", walking_routes: @walking_routes, route_name_category: "created-walking-route-name" %>
+      </div>
+    </div>
+    <div id="bookmarked-routes" class="tab-pane">
+      <div class="album py-5 bg-light">
+        <%= render "shared/index_route", walking_routes: @bookmarked_walking_routes, route_name_category: "bookmarked-walking-route-name" %>
+      </div>
+    </div>
+  </div>
+</main>

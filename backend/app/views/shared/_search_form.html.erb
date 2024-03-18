@@ -1,0 +1,6 @@
+<div class="search-form-wrapper">
+  <%= form_with url: path, local: true, method: :get, class: "search-form d-flex flex-row align-items-center" do |f| %>
+    <i class="fa-solid fa-magnifying-glass search-form-icon"></i>
+    <%= f.text_field :keyword, class: "search-form-input", placeholder: placeholder %>
+  <% end %>
+</div>

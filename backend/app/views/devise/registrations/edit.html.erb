@@ -1,0 +1,39 @@
+<% provide(:title, '登録情報の編集') %>
+<% breadcrumb :edit_user_registration, @user %>
+<main>
+  <div class="container col-xxl-10 px-4 py-3">
+    <h2 class="mb-3 text-center">登録情報の編集</h2>
+    <div class="col-lg-6 mx-auto">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="field form-floating mb-3">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", id: "edit-registration-name", class: "form-control", placeholder: "email" %>
+          <%= f.label :email, for: "edit-registration-name" %>
+        </div>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+        <div class="field">
+          <% if @minimum_password_length %>
+            <span><%= @minimum_password_length %> 文字以上（変更しない場合は空欄のままにしてください）</span>
+          <% end %>
+          <div class="form-floating mb-3">
+            <%= f.password_field :password, autocomplete: "new-password", id: "edit-registration-password", class: "form-control", placeholder: "password" %>
+            <%= f.label :password, for: "edit-registration-password" %>
+          </div>
+        </div>
+        <div class="field form-floating mb-3">
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", id: "edit-registration-confirm-password", class: "form-control", placeholder: "password" %>
+          <%= f.label :password_confirmation, for: "edit-registration-confirm-password" %>
+        </div>
+        <div class="field form-floating mb-3">
+          <%= f.password_field :current_password, autocomplete: "current-password", id: "edit-current-password", class: "form-control", placeholder: "password", required: "true" %>
+          <%= f.label :current_password, for: "edit-current-password" %>
+        </div>
+        <div class="actions">
+          <%= f.submit "登録情報を更新", class: "btn btn-primary btn--extend mb-3 edit-registration-btn" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</main>
