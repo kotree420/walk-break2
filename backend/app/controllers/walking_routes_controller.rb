@@ -10,8 +10,7 @@ class WalkingRoutesController < ApplicationController
     walking_routes = WalkingRoute.latest.
       includes(:user, bookmarks: :user).
       limit(MAX_HOME_ROUTES_COUNT)
-
-    render json: walking_routes
+    render json: IndexRouteUserResource.new(walking_routes)
   end
 
   def index
