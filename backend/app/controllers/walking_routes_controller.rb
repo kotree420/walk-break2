@@ -7,9 +7,11 @@ class WalkingRoutesController < ApplicationController
   MAX_HOME_ROUTES_COUNT = 9
 
   def home
-    @walking_routes = WalkingRoute.latest.
+    walking_routes = WalkingRoute.latest.
       includes(:user, bookmarks: :user).
       limit(MAX_HOME_ROUTES_COUNT)
+
+    render json: walking_routes
   end
 
   def index
