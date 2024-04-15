@@ -18,14 +18,12 @@ export default function Home() {
   const [walkingRoutes, setWalkingRoutes] = useState<WalkingRouteType[]>([]);
 
   const fetchWalkingRoutes = () => {
-    // TODO:ドメインベタ書き修正する
-    axios.get('http://127.0.0.1:3002/')
+    axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}`)
       .then((_res) => {
-        console.log(_res.data);
         setWalkingRoutes(_res.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.error('Error fetching walking routes:', error);
       })
   }
 
