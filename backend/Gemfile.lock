@@ -68,6 +68,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
+    alba (2.4.2)
     ast (2.4.2)
     bcrypt (3.1.18)
     bindex (0.8.1)
@@ -205,6 +206,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.7)
+    rack-cors (2.0.2)
+      rack (>= 2.0.0)
     rack-test (2.1.0)
       rack (>= 1.3)
     rails (7.0.4.3)
@@ -343,6 +346,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  alba
   bootsnap
   capybara
   carrierwave (~> 2.0)
@@ -360,6 +364,7 @@ DEPENDENCIES
   pg
   pry-rails
   puma (~> 5.0)
+  rack-cors
   rails (~> 7.0.4, >= 7.0.4.3)
   rails-i18n
   rspec-rails
