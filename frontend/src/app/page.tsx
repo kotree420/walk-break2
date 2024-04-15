@@ -3,16 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from "next/link";
 import axios from 'axios';
-
-// TODO:型定義はmodelsにまとめる
-type WalkingRouteType = {
-  id: number,
-  name: string,
-  user: {
-    id: number,
-    name: string
-  }
-}
+import { WalkingRouteType } from '../types/walkingRouteType'
 
 export default function Home() {
   const [walkingRoutes, setWalkingRoutes] = useState<WalkingRouteType[]>([]);
