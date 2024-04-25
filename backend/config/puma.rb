@@ -41,3 +41,11 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
+
+if ENV.fetch('RAILS_ENV') { 'development' } == 'development'
+  ssl_bind '0.0.0.0', 3443, {
+    key: 'config/ssl/web-server.key',
+    cert: 'config/ssl/web-server.crt',
+    verify_mode: 'none'
+  }
+end

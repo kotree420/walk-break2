@@ -39,3 +39,5 @@
 
 /node_modules
 /public/uploads
+
+/config/ssl/*
