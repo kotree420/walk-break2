@@ -20,4 +20,12 @@ Rails.application.routes.draw do
     end
     resource :bookmarks, only: [:create, :destroy]
   end
+
+  namespace :api do
+    namespace :v1 do
+      namespace :user do
+        resources :sessions, only: [:create]
+      end
+    end
+  end
 end
