@@ -24,7 +24,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       namespace :user do
-        resources :sessions, only: [:create]
+        get '/login', to: 'sessions#new'
+        post '/login', to: 'sessions#create'
       end
     end
   end

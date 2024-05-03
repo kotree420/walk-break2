@@ -6,9 +6,7 @@ import { useEffect } from 'react';
 const Page = () => {
 
   const fetchSessions = () => {
-    axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/user/sessions`, {
-      email: 'test'
-    })
+    axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/user/login`)
       .then((_res) => {
         console.log(_res);
       })
@@ -23,6 +21,9 @@ const Page = () => {
   return(
     <>
       <h1>ログインページ</h1>
+      <form action="">
+
+      </form>
     </>
   );
 }
