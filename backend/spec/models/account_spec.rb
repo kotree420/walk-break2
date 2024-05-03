@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Account, type: :model do
-  let(:account){ Account.new(name: 'example account', email: 'account@example.com') }
+  let(:account){ Account.new(name: 'example account', email: 'account@example.com',
+                            password: 'foobar', password_confirmation: 'foobar') }
 
   it 'account should be valid' do
     expect(account).to be_valid
@@ -56,5 +57,15 @@ RSpec.describe Account, type: :model do
     duplicate_email_account = Account.new(name: 'example account2', email: 'account@example.com')
     duplicate_email_account.email.downcase! # 大文字小文字を区別しない
     expect(duplicate_email_account).to be_invalid
+  end
+
+  it 'password should be present' do
+    account.password = account.password_confirmation = ''
+    expect(account).to be_invalid
+  end
+
+  it 'password should be more than 6' do
+    account.password = account.password_confirmation = '' * 5
+    expect(account).to be_invalid
   end
 end

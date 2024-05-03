@@ -4,6 +4,7 @@ class CreateAccounts < ActiveRecord::Migration[7.0]
       t.string :name, null: false, unique: true, limit: 20
       t.string :email, null: false, unique: true, limit: 255,
                 index: { unique: true, name: 'unique_emails' }
+      t.string :password_digest
 
       t.timestamps
     end
