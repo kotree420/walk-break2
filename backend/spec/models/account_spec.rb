@@ -1,8 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Account, type: :model do
-  let(:account){ Account.new(name: 'example account', email: 'account@example.com',
-                            password: 'foobar', password_confirmation: 'foobar') }
+  let(:account) do
+    Account.new(
+      name: 'example account',
+      email: 'account@example.com',
+      password: 'foobar',
+      password_confirmation: 'foobar'
+    )
+  end
 
   it 'account should be valid' do
     expect(account).to be_valid
@@ -35,7 +41,7 @@ RSpec.describe Account, type: :model do
   end
 
   it 'email should accept valid addresses' do
-    valid_emails = %w[user@example.com foo@foo.bar]
+    valid_emails = %w(user@example.com foo@foo.bar)
 
     valid_emails.each do |valid_email|
       account.email = valid_email
@@ -44,7 +50,7 @@ RSpec.describe Account, type: :model do
   end
 
   it 'email should reject invalid addresses' do
-    invalid_emails = %w[user@example,com user@example.com@com flXY8goaIkuMcaZyEpA]
+    invalid_emails = %w(user@example,com user@example.com@com flXY8goaIkuMcaZyEpA)
 
     invalid_emails.each do |invalid_email|
       account.email = invalid_email

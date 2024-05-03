@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_02_140935) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "unique_emails", unique: true
+    t.index ["name"], name: "unique_names", unique: true
   end
 
   create_table "bookmarks", force: :cascade do |t|
