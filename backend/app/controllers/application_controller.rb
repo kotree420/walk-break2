@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::API
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  include ActionController::Cookies
+
   private
 
   def configure_permitted_parameters

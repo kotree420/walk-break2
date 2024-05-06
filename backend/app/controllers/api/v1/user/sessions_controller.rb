@@ -1,12 +1,14 @@
 class Api::V1::User::SessionsController < ApplicationController
   def create
-    payload = login_params;
+    user = Account.find_by(email: params[:login][:email])
 
-    render json: payload
-  end
-
-  private
-    def login_params
-      params.require(:login).permit(:email, :password)
+    if user&.authenticate(params[:login][:password])
+      session[:user_id] = user.id
+      response = { message: 'authorized', name: user.name }
+    else
+      response = { error: 'unauthorized' }
     end
+
+    render json: response
+  end
 end

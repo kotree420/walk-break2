@@ -6,7 +6,16 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+account_array = []
 user_array = []
+
+2.times do |n|
+  account_array << Account.create!(
+    name: "テストユーザー#{n + 1}",
+    email: "test#{n + 1}@test.com",
+    password: "testuser#{n + 1}",
+  )
+end
 
 2.times do |n|
   user_array << User.create!(
