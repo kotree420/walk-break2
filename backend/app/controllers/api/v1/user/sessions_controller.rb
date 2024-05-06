@@ -1,9 +1,12 @@
 class Api::V1::User::SessionsController < ApplicationController
-  def new
-    render json: "Hello"
+  def create
+    payload = login_params;
+
+    render json: payload
   end
 
-  def create
-    render json: "Hello"
-  end
+  private
+    def login_params
+      params.require(:login).permit(:email, :password)
+    end
 end
