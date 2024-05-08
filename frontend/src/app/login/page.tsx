@@ -3,7 +3,6 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { loginFormInputsType } from '@/types/loginFormInputsType';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 const Page: React.FC = () => {

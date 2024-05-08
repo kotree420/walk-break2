@@ -1,14 +1,9 @@
 "use client"
 
+import { userInfo } from "@/types/userInfo";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-
-type userInfo = {
-  email: string,
-  name: string,
-  created_at: string
-}
 
 const Page: React.FC = () => {
   const [userInfo, setUserInfo] = useState<userInfo>({

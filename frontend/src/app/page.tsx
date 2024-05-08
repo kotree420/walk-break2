@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from "next/link";
 import axios from 'axios';
-import { WalkingRouteType } from '../types/walkingRouteType'
+import { WalkingRouteType } from '../types/models/walkingRouteType'
 
 export default function Home() {
   const [walkingRoutes, setWalkingRoutes] = useState<WalkingRouteType[]>([]);
