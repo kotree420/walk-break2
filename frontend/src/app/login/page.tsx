@@ -3,8 +3,10 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { loginFormInputsType } from '@/types/loginFormInputsType';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-const Page = () => {
+const Page: React.FC = () => {
   const [loginFormInputs, setLoginFormInputs] = useState<loginFormInputsType>({
     login: {
       email: '',
@@ -12,12 +14,15 @@ const Page = () => {
     }
   });
 
+  const router = useRouter();
+
   const clickLogin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/user/login`, loginFormInputs)
       .then((response) => {
         console.log(response.data);
+        router.push(`../user/${response.data.id}`);
       })
       .catch((error) => {
         console.log(error);

@@ -4,7 +4,8 @@ class Api::V1::User::SessionsController < ApplicationController
 
     if user&.authenticate(params[:login][:password])
       session[:user_id] = user.id
-      response = { message: 'authorized', name: user.name }
+      # TODO: idはハッシュ化
+      response = { message: 'authorized', id: user.id, name: user.name }
     else
       response = { error: 'unauthorized' }
     end
