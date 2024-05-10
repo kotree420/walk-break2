@@ -1,12 +1,14 @@
 "use client"
 
-import { userInfo } from "@/types/userInfo";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { UserInfo } from "@/types/userInfo";
+import Profile from "../components/Profile";
 
-const Page: React.FC = () => {
-  const [userInfo, setUserInfo] = useState<userInfo>({
+const Page: React.FC<{ id: string }> = ({ id }) => {
+  // fetchを使ってServer Componentにする
+  const [userInfo, setUserInfo] = useState<UserInfo>({
     email: '',
     name: '',
     created_at: ''
@@ -15,7 +17,9 @@ const Page: React.FC = () => {
   const params = useParams();
 
   const getTargetUserData = () => {
-    axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/user/${params.id}`)
+    axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/user/${params.id}`,{
+      withCredentials: true
+    })
       .then((response) => {
         setUserInfo({
           email: response.data.email,
@@ -28,8 +32,6 @@ const Page: React.FC = () => {
       })
   }
 
-  // TODO: // check_session
-
   useEffect(() => {
     getTargetUserData()
   }, [])
@@ -38,9 +40,7 @@ const Page: React.FC = () => {
     <>
       <h1>プロフィール</h1>
       <p>ユーザー情報</p>
-      <div>email: {userInfo.email}</div>
-      <div>name: {userInfo.name}</div>
-      <div>created_at: {userInfo.created_at}</div>
+      <Profile email={userInfo.email} name={userInfo.name} created_at={userInfo.created_at}/>
     </>
   );
 }

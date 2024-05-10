@@ -7,7 +7,7 @@ class Api::V1::User::SessionsController < ApplicationController
       # TODO: idはハッシュ化
       response = { message: 'authorized', id: user.id, name: user.name }
     else
-      response = { error: 'unauthorized' }
+      response = { error: 'login_unauthorized' }
     end
 
     render json: response
