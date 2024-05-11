@@ -1,13 +1,12 @@
 "use client"
 
-import axios from "axios";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { UserInfo } from "@/types/userInfo";
 import Profile from "../components/Profile";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { UserInfo } from "@/types/userInfo";
 
-const Page: React.FC<{ id: string }> = ({ id }) => {
-  // fetchを使ってServer Componentにする
+const Page: React.FC = () => {
   const [userInfo, setUserInfo] = useState<UserInfo>({
     email: '',
     name: '',
@@ -40,7 +39,7 @@ const Page: React.FC<{ id: string }> = ({ id }) => {
     <>
       <h1>プロフィール</h1>
       <p>ユーザー情報</p>
-      <Profile email={userInfo.email} name={userInfo.name} created_at={userInfo.created_at}/>
+      <Profile email={userInfo.email} name={userInfo.name} created_at={userInfo.created_at} />
     </>
   );
 }

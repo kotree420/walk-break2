@@ -18,7 +18,9 @@ const Page: React.FC = () => {
   const clickLogin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/user/login`, loginFormInputs)
+    axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/user/login`, loginFormInputs,
+      { withCredentials: true }
+    )
       .then((response) => {
         router.push(`../user/${response.data.id}`);
       })
