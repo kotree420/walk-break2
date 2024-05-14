@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :user do
         post '/login', to: 'sessions#create'
+        delete '/logout', to: 'sessions#destroy'
+        get '/logged_in', to: 'sessions#logged_in?'
         get '/:id', to: 'users#show'
       end
     end

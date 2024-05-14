@@ -9,9 +9,10 @@ class ApplicationController < ActionController::API
     @current_user = Account.find_by(id: session[:user_id])
     return if @current_user
 
-    render json: { error: 'check_unauthorized' }
+    render json: { error: 'not_logged_in' }
   end
 
+  # 以下は改修に伴い不要であれば削除
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email])
     # name,profile_imageはdevise外のprofilesコントローラーでupdateするためここでは記載なし

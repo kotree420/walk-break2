@@ -28,10 +28,6 @@ module WalkBreak
     #Cookies
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
-      # domain: :all,
-      # tld_length: 2,
-      # secure: true
-    config.middleware.use ActionDispatch::ContentSecurityPolicy::Middleware
     config.action_dispatch.cookies_same_site_protection = :none
   end
 end
