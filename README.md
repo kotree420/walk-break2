@@ -1,5 +1,5 @@
 # walk-break2
-[Walk break](https://walkbreak-11323cd54fcf.herokuapp.com/)のリメイク<br>
+[Walk break](https://github.com/kotree420/walk-break)のリメイク<br>
 
 ## TODO
 ### インフラ
